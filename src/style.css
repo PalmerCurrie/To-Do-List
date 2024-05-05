@@ -1,0 +1,73 @@
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    box-sizing: border-box;
+    height: 100vh; /* Set sidebar height to full viewport height */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+    float: left;
+}
+
+.option-container {
+    margin-bottom: 20px;
+}
+
+.project-container {
+    margin-bottom: 20px;
+}
+
+.project {
+    cursor: pointer; /* Change cursor to pointer on hover */
+    padding: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.project:hover {
+    background-color: #c0c0c0; /* Change background color on hover */
+}
+
+.project-selected {
+    background-color: #00bcd4 !important; /* Change background color of selected project */
+    color: white; /* Change text color of selected project */
+}
+
+#all-tasks {
+    cursor: pointer; /* Change cursor to pointer on hover */
+    padding: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+#all-tasks:hover {
+    background-color: #c0c0c0; /* Change background color on hover */
+}
+
+#all-tasks.project-selected {
+    background-color: #00bcd4 !important; /* Change background color of selected option */
+    color: white; /* Change text color of selected option */
+}
+
+/* Todo container styles */
+.todo-container {
+    padding: 20px;
+    box-sizing: border-box;
+    float: left;
+    width: calc(100% - 250px); /* Set todo container width to remaining space */
+    height: 100vh; /* Set todo container height to full viewport height */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+}
+
+.todo-item {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.todo-item:hover {
+    background-color: #e0e0e0; /* Change background color on hover */
+}

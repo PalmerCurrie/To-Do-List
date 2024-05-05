@@ -3,12 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webpack Demo</title>
+    <title>To Do List</title>
 </head>
 <body>
     <div class="container" id="container">
-        Testing Container Div
+        <div class="sidebar" id="sidebar">
+            <div class="option-container" id="option-container">
+                <div id="all-tasks">All Tasks</div>
+            </div>
+            <div class="project-container" id="project-container">
+                <div class="project">Project 1</div>
+                <div class="project">Project 2...</div>
+            </div>
+            <button id="add-project-button">Add Project</button>
+        </div>
+        <div class="todo-container" id="todo-container">
+            <div class="todo-item">ToDo 1</div>
+            <div class="todo-item">ToDo 2</div>
+        </div>
+
+
     </div>
-    <script src="bundle.js"></script>
+    <script defer="defer" src="bundle.js"></script>
 </body>
 </html>
