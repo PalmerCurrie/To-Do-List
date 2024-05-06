@@ -9,15 +9,15 @@
     float: left;
 }
 
-.option-container {
+.project-option-container {
     margin-bottom: 20px;
 }
 
-.project-container {
+.project-option-container {
     margin-bottom: 20px;
 }
 
-.project {
+.sidebar-option {
     cursor: pointer; /* Change cursor to pointer on hover */
     padding: 10px;
     background-color: #e0e0e0;
@@ -25,13 +25,16 @@
     margin-bottom: 5px;
 }
 
-.project:hover {
-    background-color: #c0c0c0; /* Change background color on hover */
+.sidebar-option:hover {
+    filter: brightness(90%); /* Change background color on hover */
 }
 
-.project-selected {
+.sidebar-option-selected {
     background-color: #00bcd4 !important; /* Change background color of selected project */
     color: white; /* Change text color of selected project */
+}
+.sidebar-option-selected:hover {
+    filter: brightness(90%); /* Change background color on hover */
 }
 
 #all-tasks {

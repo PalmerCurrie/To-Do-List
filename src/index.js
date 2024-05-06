@@ -1,8 +1,9 @@
 import "./style.css";
 import ToDo from "./ToDo";
 import Project from "./Project";
+import "./sidebar.js";
 
-let projects = [];
+
 
 
 // To-Do
@@ -10,130 +11,11 @@ let projects = [];
 // form for adding To-DO
 // 
 
-const sidebar = document.getElementById("sidebar");
-const projectContainer = document.getElementById("project-container")
-const addProjectButton = document.getElementById("add-project-button");
-const allTasksDiv = document.getElementById("all-tasks");
+
+
+
 
 const todoContainer = document.getElementById("todo-container");
-
-let selectedProjectIndex = 0;
-let isProjectFormOpen = false;
-addProjectButton.addEventListener("click", () => {
-    if (!isProjectFormOpen) {
-        isProjectFormOpen = true;
-        generateNewProjectForm();
-    }
-    
-})
-
-function generateNewProjectForm() {
-    const projectForm = document.createElement("div");
-    const titleInput = document.createElement("input");
-    const generateProjectButton = document.createElement("button");
-    const cancelButton = document.createElement("button");
-
-    titleInput.placeholder = "Enter Project Name";
-    titleInput.classList.add("project-title-input");
-    cancelButton.textContent = "Cancel";
-    generateProjectButton.textContent = "Add";
-    
-    projectForm.appendChild(titleInput);
-    projectForm.appendChild(generateProjectButton);
-    projectForm.appendChild(cancelButton);
-
-    projectContainer.appendChild(projectForm);
-
-    generateProjectButton.addEventListener("click", () => {
-        let title = titleInput.value;
-        generateProject(title, () => {
-            projectContainer.removeChild(projectForm);
-        });
-        isProjectFormOpen = false;
-    })
-
-    cancelButton.addEventListener("click", () => {
-        projectContainer.removeChild(projectForm);
-        isProjectFormOpen = false;
-    })
-
-}
-
-
-function generateProject(title) {
-    let newProject = new Project(title);
-    projects.push(newProject);
-    updateProjects();
-
-}
-
-function updateProjects() {
-    projectContainer.textContent = "";
-
-    for(const [index, proj] of projects.entries()) {
-        const projectDiv = document.createElement("div");
-        projectDiv.classList.add("project");
-        const deleteButton = document.createElement("button");
-        const renameButton = document.createElement("button");
-        const title = document.createElement("p");
-
-        title.textContent = proj.title;
-        deleteButton.textContent = "Delete";
-        renameButton.textContent = "Rename";
-        projectDiv.appendChild(title);
-        projectDiv.appendChild(deleteButton);
-        projectDiv.appendChild(renameButton);
-
-        
-        deleteButton.addEventListener("click", () => {
-            if (index === selectedProjectIndex) {
-                selectedProjectIndex = null; // Deselect the deleted project
-            }
-            projects.splice(index, 1);
-            updateProjects();
-        })
-
-        renameButton.addEventListener("click", () => {
-
-            let newTitle = 
-            proj.title = newTitle;
-            updateProjects();
-        })
-
-        projectDiv.addEventListener("click", () => {
-            selectProject(index);
-        })
-
-        if (selectedProjectIndex !== null && selectedProjectIndex < projectContainer.children.length) {
-            const selectedProject = projectContainer.children[selectedProjectIndex];
-            selectedProject.classList.add("project-selected");
-            allTasksDiv.classList.remove("project-selected");
-        } else {
-            allTasksDiv.classList.add("project-selected");
-        }
-
-        projectContainer.appendChild(projectDiv);
-    }
-}
-
-function selectProject(index) {
-    const projectItems = document.querySelectorAll(".project");
-
-    projectItems.forEach(item => {
-        item.classList.remove("project-selected");
-    });
-
-    if (index >= 0 && index < projectItems.length) {
-        projectItems[index].classList.add("project-selected");
-        allTasksDiv.classList.remove("project-selected");
-        selectedProjectIndex = index;
-        updateToDoContent(projects[index]);
-    } else {
-        allTasksDiv.classList.add("project-selected");
-        generateAllToDo();
-    }
-
-}
 
 
 
