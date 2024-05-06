@@ -64,13 +64,99 @@
     overflow-y: auto; /* Enable vertical scrolling if content overflows */
 }
 
+
+.todo-header {
+    height: 150px;
+    background-color: #3498db; /* Adjust the background color to fit your theme */
+    color: white; /* Text color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-header h1 {
+    font-size: 24px; /* Adjust the font size as needed */
+}
+
+
 .todo-item {
     padding: 10px;
     background-color: #f9f9f9;
     border-radius: 5px;
     margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.todo-item .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-item h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.todo-item p {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.todo-item .date {
+    font-size: 14px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    align-self: center; /* Center vertically */
 }
 
 .todo-item:hover {
     background-color: #e0e0e0; /* Change background color on hover */
+}
+
+
+/* Base button style */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db; /* Button background color */
+    color: #ffffff; /* Button text color */
+    transition: background-color 0.3s ease;
+}
+
+/* Hover state */
+.button:hover {
+    background-color: #2980b9; /* Darker background color on hover */
+}
+
+
+/* Smaller button style */
+.button-small {
+    display: inline-block;
+    padding: 6px 12px; /* Adjusted padding for smaller size */
+    font-size: 12px; /* Adjusted font size for smaller size */
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db; /* Button background color */
+    color: #ffffff; /* Button text color */
+    transition: background-color 0.3s ease;
+}
+
+/* Hover state */
+.button-small:hover {
+    background-color: #2980b9; /* Darker background color on hover */
 }

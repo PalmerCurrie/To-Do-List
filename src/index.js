@@ -1,62 +1,113 @@
 import "./style.css";
 import ToDo from "./ToDo";
 import Project from "./Project";
+import { getProjects } from './projects.js';
 import "./sidebar.js";
+import { saveProjects, loadProjects} from "./storage.js"
 
 
 
 
 // To-Do
-// form for adding projects
-// form for adding To-DO
+// Saving data
+// Edit ToDo's
+// Favourite ToDo's to show up in important option
+// the Date todos filter for today, 7 days
 // 
 
+let projects = getProjects();
+loadProjects();
+generateAllToDo();
 
-
+const container = document.getElementById("container");
+container.onchange = saveProjects;
 
 
 const todoContainer = document.getElementById("todo-container");
 
 
 
+export function generateAllToDo() {
+    let projects = getProjects();
+    const todoContainer = document.getElementById("todo-container");
+    todoContainer.textContent = "";
+    generateOptionHeader("All Tasks");
+    projects.forEach(project => {
+        project.todos.forEach(todo => {
+            const todoItem = displayToDo(todo);
+            todoContainer.appendChild(todoItem);
+            
+        });
+    });
 
-
-function generateAllToDo() {
 
 }
+
+function displayToDo(todo) {
+    const listItem = document.createElement("li");
+
+    const divContent = document.createElement("div");
+    divContent.classList.add("content");
+
+
+    const title = document.createElement("h2");
+    title.textContent = todo.title;
+    const description = document.createElement("p");
+    description.textContent = todo.description;
+    const dueDate = document.createElement("div");
+    dueDate.classList.add("date");
+    dueDate.textContent = todo.dueDate;
+
+    divContent.appendChild(title);
+    divContent.appendChild(description);
+    listItem.appendChild(divContent);
+    listItem.appendChild(dueDate);
+    listItem.classList.add("todo-item");
+    return listItem;
+}
+
+function generateOptionHeader(titleString) {
+    const todoContainer = document.getElementById("todo-container");
+    const headerDiv = document.createElement("div");
+    headerDiv.classList.add("todo-header");
+    const header = document.createElement("h1");
+    header.textContent = titleString;
+    headerDiv.appendChild(header);
+    todoContainer.appendChild(headerDiv);
+}
+
 
 let isTaskFormOpen = false;
-function updateToDoContent(project) {
+export function updateToDoContent(project) {
     todoContainer.textContent = "";
-    addToDoButton()
+    generateOptionHeader(project.title);
     if (Array.isArray(project.todos)) {
         for (const todo of project.todos) {
-        const task = document.createElement("div");
-        const title = document.createElement("p");
-        title.textContent = todo.title;
-
-        task.appendChild(title);
-
-        todoContainer.appendChild(task);   
+        todoContainer.appendChild(displayToDo(todo));
         }
     }
+    addToDoButton(project)
 }
 
 
-function addToDoButton() {
+
+function addToDoButton(project) {
     const addButton = document.createElement("button");
     addButton.textContent = "Add Task";
     addButton.id = "add-task-button";
+    addButton.classList.add("button");
     addButton.addEventListener("click", () => {
-        if (!isTaskFormOpen) {
+        const todoForm = document.querySelectorAll(".todo-container .todo-form");
+        if (todoForm.length === 0) {
             isTaskFormOpen = true;
-            generateNewTaskForm();
+            saveProjects();
+            generateNewTaskForm(project);
         }
     } )
     todoContainer.appendChild(addButton);
 }
 
-function generateNewTaskForm() {
+function generateNewTaskForm(selectedProject) {
     const taskForm = document.createElement("div");
     taskForm.classList.add("todo-form");
     taskForm.setAttribute("id", "todo-form");
@@ -82,13 +133,15 @@ function generateNewTaskForm() {
     dueDateLabel.htmlFor = "duedate-input"; 
 
     const addButton = document.createElement("button");
+    addButton.classList.add("button-small");
+
     addButton.textContent = "Add Task"
     addButton.id = "add-todo-button";
     addButton.addEventListener("click", () => {
         let newToDo = new ToDo(title.value, description.value, dueDate.value, false)
-        let selectedProject = projects[selectedProjectIndex];
         selectedProject.todos.push(newToDo);
-        updateToDoContent(() => {
+        saveProjects();
+        updateToDoContent(selectedProject, () => {
             todoContainer.removeChild(taskForm);
         });
         isTaskFormOpen = false;
