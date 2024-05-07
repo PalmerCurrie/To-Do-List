@@ -7,14 +7,6 @@ import { saveProjects, loadProjects} from "./storage.js"
 
 
 
-
-// To-Do
-// Saving data
-// Edit ToDo's
-// Favourite ToDo's to show up in important option
-// the Date todos filter for today, 7 days
-// 
-
 let projects = getProjects();
 loadProjects();
 generateAllToDo();

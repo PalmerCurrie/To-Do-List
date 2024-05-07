@@ -167,13 +167,6 @@ function handleSelectedOption(selectedOption) {
             generateAllToDo();
             // Handle when selectedOption is the element with id "all-tasks"
             break;
-        case "today":
-            // Handle when selectedOption is the element with id "today"
-
-            break;
-        case "next-7-days":
-            // Handle when selectedOption is the element with id "next-7-days"
-            break;
         case "important":
             generateImportantToDo();
             // Handle when selectedOption is the element with id "important"
