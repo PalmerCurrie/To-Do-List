@@ -40,6 +40,21 @@ export function generateAllToDo() {
         });
     });
 
+}
+
+export function generateImportantToDo() {
+    let projects = getProjects();
+    const todoContainer = document.getElementById("todo-container");
+    todoContainer.textContent = "";
+    generateOptionHeader("Important");
+    projects.forEach(project => {
+        project.todos.forEach(todo => {
+            if (todo.priority) {
+                const todoItem = displayToDo(todo);
+                todoContainer.appendChild(todoItem);
+            }
+        });
+    });
 
 }
 
@@ -49,7 +64,6 @@ function displayToDo(todo) {
     const divContent = document.createElement("div");
     divContent.classList.add("content");
 
-
     const title = document.createElement("h2");
     title.textContent = todo.title;
     const description = document.createElement("p");
@@ -57,14 +71,41 @@ function displayToDo(todo) {
     const dueDate = document.createElement("div");
     dueDate.classList.add("date");
     dueDate.textContent = todo.dueDate;
+    const favouriteImage = document.createElement("img");
+    if (todo.priority) {
+        favouriteImage.src = "Icons/star-yellow.svg";
+        todo.priority = true;
+    } else {
+        favouriteImage.src = "Icons/star.svg";
+        todo.priority = false;
+    }
+
+    const favourite = document.createElement("div");
+    favourite.classList.add("svg-icon");
+    favourite.appendChild(favouriteImage);
+
+    favourite.addEventListener("click", () => {
+        if (!todo.priority) {
+            favouriteImage.src = "Icons/star-yellow.svg";
+            todo.priority = true;
+        } else {
+            favouriteImage.src = "Icons/star.svg";
+            todo.priority = false;
+        }
+        saveProjects();
+    })
+
 
     divContent.appendChild(title);
     divContent.appendChild(description);
     listItem.appendChild(divContent);
     listItem.appendChild(dueDate);
+    listItem.appendChild(favourite);
     listItem.classList.add("todo-item");
     return listItem;
 }
+
+
 
 function generateOptionHeader(titleString) {
     const todoContainer = document.getElementById("todo-container");

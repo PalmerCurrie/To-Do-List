@@ -2,7 +2,7 @@ import "./style.css";
 import ToDo from "./ToDo";
 import Project from "./Project";
 import { getProjects } from './projects.js';
-import { updateToDoContent, generateAllToDo } from "./index.js";
+import { updateToDoContent, generateAllToDo, generateImportantToDo } from "./index.js";
 import { saveProjects } from "./storage.js";
 
 const projects = getProjects();
@@ -175,6 +175,7 @@ function handleSelectedOption(selectedOption) {
             // Handle when selectedOption is the element with id "next-7-days"
             break;
         case "important":
+            generateImportantToDo();
             // Handle when selectedOption is the element with id "important"
             break;
         default:

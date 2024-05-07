@@ -9,6 +9,13 @@
     float: left;
 }
 
+.svg-icon {
+    display: inline-block; /* Make the div inline-block */
+    width: 20px; /* Set the width */
+    height: 20px; /* Set the height */
+    align-self: center; /* Align vertically in inline context */
+}
+
 .project-option-container {
     margin-bottom: 20px;
 }
@@ -72,10 +79,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .todo-header h1 {
-    font-size: 24px; /* Adjust the font size as needed */
+    font-size: 52px; /* Adjust the font size as needed */
 }
 
 
@@ -87,6 +96,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 5px;
 }
 
 .todo-item .content {
