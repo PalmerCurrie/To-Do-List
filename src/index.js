@@ -34,7 +34,7 @@ export function generateAllToDo() {
     generateOptionHeader("All Tasks");
     projects.forEach(project => {
         project.todos.forEach(todo => {
-            const todoItem = displayToDo(todo);
+            const todoItem = displayToDo(todo, project);
             todoContainer.appendChild(todoItem);
             
         });
@@ -50,7 +50,7 @@ export function generateImportantToDo() {
     projects.forEach(project => {
         project.todos.forEach(todo => {
             if (todo.priority) {
-                const todoItem = displayToDo(todo);
+                const todoItem = displayToDo(todo, project);
                 todoContainer.appendChild(todoItem);
             }
         });
@@ -95,12 +95,23 @@ function displayToDo(todo) {
         saveProjects();
     })
 
+    const edit = document.createElement("div");
+    const editImage = document.createElement("img");
+    editImage.src = "Icons/edit.svg";
+    edit.classList.add("svg-icon");
+    edit.appendChild(editImage);
+
+    edit.addEventListener("click", () => {
+        editToDo(todo);
+    })
+
 
     divContent.appendChild(title);
     divContent.appendChild(description);
     listItem.appendChild(divContent);
     listItem.appendChild(dueDate);
     listItem.appendChild(favourite);
+    listItem.appendChild(edit);
     listItem.classList.add("todo-item");
     return listItem;
 }
@@ -148,11 +159,15 @@ function addToDoButton(project) {
     todoContainer.appendChild(addButton);
 }
 
-function generateNewTaskForm(selectedProject) {
+
+
+
+
+
+function createNewToDoForm() {
     const taskForm = document.createElement("div");
     taskForm.classList.add("todo-form");
     taskForm.setAttribute("id", "todo-form");
-
 
     const title = document.createElement("input");
     title.id = "title-input";
@@ -173,12 +188,31 @@ function generateNewTaskForm(selectedProject) {
     dueDateLabel.textContent = "Due Date (Optional): ";
     dueDateLabel.htmlFor = "duedate-input"; 
 
-    const addButton = document.createElement("button");
-    addButton.classList.add("button-small");
+    taskForm.appendChild(titleLabel);
+    taskForm.appendChild(title);
+    taskForm.appendChild(descriptionLabel);
+    taskForm.appendChild(description);
+    taskForm.appendChild(dueDateLabel);
+    taskForm.appendChild(dueDate);
 
-    addButton.textContent = "Add Task"
-    addButton.id = "add-todo-button";
+    todoContainer.appendChild(taskForm);
+        
+}
+
+
+function generateNewTaskForm(selectedProject) {
+    createNewToDoForm();
+    const taskForm = document.getElementById("todo-form");
+    const addButton = document.createElement("button");
+    addButton.id = "add-task-button";
+    addButton.classList.add("button-small");
+    addButton.textContent = "Add New To Do";
+
     addButton.addEventListener("click", () => {
+        const title = document.getElementById("title-input");
+        const description = document.getElementById("description-input");
+        const dueDate = document.getElementById("duedate-input");
+
         let newToDo = new ToDo(title.value, description.value, dueDate.value, false)
         selectedProject.todos.push(newToDo);
         saveProjects();
@@ -187,18 +221,42 @@ function generateNewTaskForm(selectedProject) {
         });
         isTaskFormOpen = false;
        
-
     })
 
-
-
-    taskForm.appendChild(title);
-    taskForm.appendChild(titleLabel);
-    taskForm.appendChild(description);
-    taskForm.appendChild(descriptionLabel);
-    taskForm.appendChild(dueDate);
-    taskForm.appendChild(dueDateLabel);
     taskForm.appendChild(addButton);
 
-    todoContainer.appendChild(taskForm);
+}
+
+
+
+
+
+function editToDo(todo, project) {
+    createNewToDoForm();
+
+    const taskForm = document.getElementById("todo-form");
+    const editButton = document.createElement("button");
+    editButton.id = "add-task-button";
+    editButton.classList.add("button-small");
+    editButton.textContent = "Edit To Do";
+
+    editButton.addEventListener("click", () => {
+        const title = document.getElementById("title-input");
+        const description = document.getElementById("description-input");
+        const dueDate = document.getElementById("duedate-input");
+
+        todo.title = title.value;
+        todo.description = description.value;
+        todo.dueDate = dueDate.value;
+        saveProjects();
+    
+        // NEED TO FIND A WAY TO EDIT THE CURRENT TODO DIV AND ALSO REFLECT IT IN THE PROJECT OF THE PROJECTS
+        // Right now it will edit it on the refresh of the content
+        todoContainer.removeChild(taskForm);
+        isTaskFormOpen = false;
+       
+    })
+    taskForm.appendChild(editButton);
+
+
 }

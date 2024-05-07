@@ -14,6 +14,7 @@
     width: 20px; /* Set the width */
     height: 20px; /* Set the height */
     align-self: center; /* Align vertically in inline context */
+    margin: 5px;
 }
 
 .project-option-container {
@@ -170,4 +171,46 @@
 /* Hover state */
 .button-small:hover {
     background-color: #2980b9; /* Darker background color on hover */
+}
+
+/* CSS styles for the todo-form */
+.todo-form {
+    background-color: #ffffff; /* White background */
+    padding: 20px; /* Padding around the form */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    margin-bottom: 20px; /* Margin bottom to separate from other elements */
+}
+
+/* CSS styles for input fields */
+input[type="text"],
+input[type="date"] {
+    width: 100%; /* Full width */
+    padding: 8px; /* Padding */
+    margin-bottom: 10px; /* Margin bottom to separate input fields */
+    border: 1px solid #cccccc; /* Border */
+    border-radius: 3px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+/* CSS styles for labels */
+label {
+    display: block; /* Display as block to ensure labels are on a new line */
+    font-weight: bold; /* Bold font */
+    margin-bottom: 5px; /* Margin bottom to separate labels from input fields */
+}
+
+/* CSS styles for the button */
+.button-small {
+    background-color: #007bff; /* Blue background */
+    color: #ffffff; /* White text */
+    padding: 10px 15px; /* Padding */
+    border: none; /* No border */
+    border-radius: 3px; /* Rounded corners */
+    cursor: pointer; /* Cursor pointer on hover */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.button-small:hover {
+    background-color: #0056b3; /* Darker blue background on hover */
 }
