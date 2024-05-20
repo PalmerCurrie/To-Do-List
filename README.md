@@ -6,4 +6,4 @@ A To-Do List made with Javascript, HTML, and CSS, working with Modules and Webpa
 
 Features to add:
 - Form Validation for inputting To Do's
-- Filtering To Do's by Date
+- Filtering To Do's by Date 
